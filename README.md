@@ -9,3 +9,7 @@ Some fundamental (but not trivial with char* strings) functions are available:
 * bool equals(const char *s1, const char *s2);
 * void substring(const char *str, int start, int length, char *output);
 * void section(char *str, const char *separator, int index, char *output);
+
+```make test``` to run unit tests.
+
+```make build``` to build the static library.

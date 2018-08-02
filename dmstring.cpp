@@ -1,9 +1,8 @@
 #include "dmstring.h"
 #include <string.h>
 #include <stdlib.h>
-//#include <stdio.h>
 
-#define CATCH_CONFIG_MAIN
+//#define CATCH_CONFIG_MAIN
 
 int indexOf(const char *str, const char *search, int start = 0)
 {
