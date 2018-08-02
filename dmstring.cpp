@@ -37,13 +37,25 @@ void substring(const char *str, int start, int length, char *output)
 {
     if (start + length > strlen(str))
         length = strlen(str) - start;
-        
 
     for (int i = 0; i < length; i++)
     {
         output[i] = str[i + start];
     }
     output[length] = 0;
+}
+
+int substringInt(const char *str, int start, int length)
+{
+    char buff[20];
+    substring(str, start, length, buff);
+    return atoi(buff);
+}
+float substringFloat(const char *str, int start, int length)
+{
+    char buff[20];
+    substring(str, start, length, buff);
+    return atof(buff);
 }
 
 void section(char *str, const char *separator, int index, char *output)
@@ -66,16 +78,16 @@ void section(char *str, const char *separator, int index, char *output)
     int lastIndex = indexOf(str, separator, 0);
     for (int i = 1; i <= index; i++)
     {
-        
+
         if (i == index)
         {
             int nextIndex = indexOf(str, separator, lastIndex + 1);
-            int tokenLength = nextIndex - (lastIndex+1);
+            int tokenLength = nextIndex - (lastIndex + 1);
             substring(str, lastIndex + 1, tokenLength, output);
             return;
         }
-        lastIndex = indexOf(str, separator, lastIndex+1);
-        if(lastIndex == -1)
+        lastIndex = indexOf(str, separator, lastIndex + 1);
+        if (lastIndex == -1)
         {
             strcpy(output, "");
             return;
@@ -118,6 +130,24 @@ TEST_CASE("string substring", "[subString]")
 
     substring(original, 1, 15, buff);
     REQUIRE(equals("ifpafpouf", buff) == true);
+}
+
+TEST_CASE("number substring", "[subString]")
+{
+    const char *original = "pif,40.18,paf,pouf";
+    
+
+    int i = substringInt(original, 4, 5);
+    REQUIRE(i == 40);
+
+    float f = substringFloat(original, 4, 5);
+    REQUIRE(f == 40.18f);
+
+    /*substring(original, 3, 4, buff);
+    REQUIRE(equals("pafp", buff) == true);
+
+    substring(original, 1, 15, buff);
+    REQUIRE(equals("ifpafpouf", buff) == true);*/
 }
 
 TEST_CASE("string indexOf", "[indexOf]")
