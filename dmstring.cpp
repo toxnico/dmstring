@@ -4,7 +4,7 @@
 
 //#define CATCH_CONFIG_MAIN
 
-int indexOf(const char *str, const char *search, int start = 0)
+int indexOf(const char *str, const char *search, int start)
 {
     const char *haystack = str + start;
 
@@ -70,7 +70,7 @@ void section(char *str, const char *separator, int index, char *output)
     if (index == 0)
     {
         int nextIndex = indexOf(str, separator, 0);
-        int tokenLength = nextIndex;
+        //int tokenLength = nextIndex;
         substring(str, 0, nextIndex, output);
         return;
     }
@@ -93,6 +93,10 @@ void section(char *str, const char *separator, int index, char *output)
             return;
         }
     }
+}
+
+bool startsWith(const char *str, const char *stringToSearch){
+    return indexOf(str, stringToSearch, 0) == 0;
 }
 
 #ifdef CATCH_CONFIG_MAIN
@@ -142,12 +146,6 @@ TEST_CASE("number substring", "[subString]")
 
     float f = substringFloat(original, 4, 5);
     REQUIRE(f == 40.18f);
-
-    /*substring(original, 3, 4, buff);
-    REQUIRE(equals("pafp", buff) == true);
-
-    substring(original, 1, 15, buff);
-    REQUIRE(equals("ifpafpouf", buff) == true);*/
 }
 
 TEST_CASE("string indexOf", "[indexOf]")
@@ -221,16 +219,6 @@ TEST_CASE("string sections", "[section]")
     REQUIRE(equals("bcd", buff));
 
     REQUIRE(equals("un,deux,trois,quatre", str) == true);
-}
-
-#else
-int main(int argc, char **args)
-{
-    char str[] = "un,deux,trois,quatre";
-    char buff[50];
-
-    section(str, ",", 0, buff);
-    return 0;
 }
 
 #endif
