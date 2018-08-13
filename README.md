@@ -1,4 +1,4 @@
-# DMLibCpp
+# DMString
 
 I essentially wrote this library to parse raw char* strings in an embedded, non-Arduino, environment (typically ESP-IDF).
 
